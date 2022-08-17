@@ -1,0 +1,11 @@
+services:
+  couchdb:
+    image: couchdb
+    container_name: cdb-cli
+    ports:
+      - 5984:5984
+    environment:
+      - COUCHDB_USER=admin
+      - COUCHDB_PASSWORD=pass
+    volumes:
+      - ./data/couchdb:/opt/couchdb/data

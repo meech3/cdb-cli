@@ -128,7 +128,7 @@ async function set(args: string[]): Promise<void> {
     }
 
     let option = curr.replace("--", "");
-    if (option !== "url" && option !== "auth") {
+    if (option !== "url" && option !== "auth" && option !== "database") {
       logger.error("invalid_option", args[i]);
       process.exit(1);
     }

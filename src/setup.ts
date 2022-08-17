@@ -10,6 +10,7 @@ import logger from "./logger.js";
     const data = {
       url: "http://localhost:5984",
       auth: "admin:pass",
+      database: "",
     };
     await fs.writeFile(filePath, JSON.stringify(data));
   } catch (error) {

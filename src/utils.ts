@@ -7,6 +7,7 @@ import fetch from "node-fetch";
 type Defaults = {
   url: string;
   auth: string;
+  database: string;
 };
 
 function isValidJSON(json: string): boolean {

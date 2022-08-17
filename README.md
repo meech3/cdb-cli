@@ -32,17 +32,18 @@ npm i -g cdb-cli
 
 ### Configuration
 
-Upon installation a default URL and default credentials will be set for you.
+Upon installation a default URL, default credentials, and default database will be set for you.
 
-The URL is set to `http://localhost:5984` and the credentials are set to `admin:pass`.
+The URL is set to `http://localhost:5984`,the credentials are set to `admin:pass`, and the database is set to an empty string (meaning that no default database is set).
 
 You can edit them with the following commands:
 
 ```
 cdb set --url http://mycustomurl.com/
 cdb set --auth username:password
+cdb set --database example
 
-# setting both at the same time
+# setting multiple defaults at the same time
 cdb set --url http://mycustomurl.com --auth username:password
 ```
 

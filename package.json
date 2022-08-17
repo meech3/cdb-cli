@@ -1,0 +1,45 @@
+{
+  "name": "cdb-cli",
+  "version": "1.0.0",
+  "description": "Command line tool for interacting with CouchDB",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "npx tsc && chmod a+x dist/index.js",
+    "watch": "nodemon --watch 'src/**' --ext '*' --exec 'npm run build'",
+    "lint": "npx prettier --check . '!dist/**'",
+    "format": "npx prettier --write . '!dist/**'",
+    "postinstall": "node dist/setup.js",
+    "prepublishOnly": "npm run format && npm run build"
+  },
+  "bin": {
+    "cdb": "./dist/index.js"
+  },
+  "files": [
+    "dist/**"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meech3/cdb-cli.git"
+  },
+  "keywords": [
+    "couchdb",
+    "cli"
+  ],
+  "author": "Mitchell Wilson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/meech3/cdb-cli/issues"
+  },
+  "homepage": "https://github.com/meech3/cdb-cli#readme",
+  "devDependencies": {
+    "@types/node": "^18.7.6",
+    "@types/node-fetch": "^2.6.2",
+    "nodemon": "^2.0.19",
+    "prettier": "2.7.1",
+    "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "node-fetch": "^3.2.10"
+  }
+}

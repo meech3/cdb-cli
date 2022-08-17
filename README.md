@@ -47,6 +47,8 @@ cdb set --database example
 cdb set --url http://mycustomurl.com --auth username:password
 ```
 
+Setting a default database will allow you to omit the `database` argument in all of the [document functions](#document-functions), although you can still provide it if you want.
+
 ## Database functions
 
 ### Create database

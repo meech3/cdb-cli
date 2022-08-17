@@ -70,10 +70,25 @@ async function replicate(args: string[]): Promise<void> {
 }
 
 async function insert(args: string[]): Promise<void> {
-  utils.validateInput(args, ["database", "document"]);
+  const expected = ["database", "document"];
+  if (args.length < 2) {
+    expected.shift();
+  }
 
-  const document = await utils.normalizeDocument(args[1]);
-  const database = await utils.normalizeDatabase(args[0]).then((data) => `${data}/${document._id}`);
+  utils.validateInput(args, expected);
+
+  let database;
+  let document: any;
+  if (args.length < 2) {
+    document = await utils.normalizeDocument(args[0]);
+    database = await utils
+      .getDefaults()
+      .then(async (defaults) => await utils.normalizeDatabase(defaults.database))
+      .then(async (data) => `${data}/${document._id}`);
+  } else {
+    document = await utils.normalizeDocument(args[1]);
+    database = await utils.normalizeDatabase(args[0]).then((data) => `${data}/${document._id}`);
+  }
 
   delete document._id;
   if (document.hasOwnProperty("_rev")) {
@@ -84,10 +99,22 @@ async function insert(args: string[]): Promise<void> {
 }
 
 async function remove(args: string[]): Promise<void> {
-  utils.validateInput(args, ["database", "id"]);
+  const expected = ["database", "id"];
+  if (args.length < 2) {
+    expected.shift();
+  }
 
-  const database = await utils.normalizeDatabase(args[0]);
-  const id = args[1];
+  utils.validateInput(args, expected);
+
+  let database;
+  let id;
+  if (args.length < 2) {
+    database = await utils.getDefaults().then(async (defaults) => await utils.normalizeDatabase(defaults.database));
+    id = args[0];
+  } else {
+    database = await utils.normalizeDatabase(args[0]);
+    id = args[1];
+  }
 
   let url = `${database}/${id}`;
   const rev = await utils.fetchRev(url);
@@ -97,19 +124,44 @@ async function remove(args: string[]): Promise<void> {
 }
 
 async function read(args: string[]): Promise<void> {
-  utils.validateInput(args, ["database", "id"]);
+  const expected = ["database", "id"];
+  if (args.length < 2) {
+    expected.shift();
+  }
 
-  const database = await utils.normalizeDatabase(args[0]);
-  const id = args[1];
+  utils.validateInput(args, expected);
+
+  let database;
+  let id;
+  if (args.length < 2) {
+    database = await utils.getDefaults().then(async (defaults) => await utils.normalizeDatabase(defaults.database));
+    id = args[0];
+  } else {
+    database = await utils.normalizeDatabase(args[0]);
+    id = args[1];
+  }
 
   await utils.request(`${database}/${id}`, "GET");
 }
 
 async function update(args: string[]): Promise<void> {
-  utils.validateInput(args, ["database", "document"]);
+  const expected = ["database", "document"];
+  if (args.length < 2) {
+    expected.shift();
+  }
 
-  const database = await utils.normalizeDatabase(args[0]);
-  const document = await utils.normalizeDocument(args[1]);
+  utils.validateInput(args, expected);
+
+  let database;
+  let document;
+  if (args.length < 2) {
+    database = await utils.getDefaults().then(async (defaults) => await utils.normalizeDatabase(defaults.database));
+    document = await utils.normalizeDocument(args[0]);
+  } else {
+    database = await utils.normalizeDatabase(args[0]);
+    document = await utils.normalizeDocument(args[1]);
+  }
+
   const url = `${database}/${document._id}`;
 
   if (!document.hasOwnProperty("_rev")) {

@@ -10,7 +10,7 @@
     "lint": "npx prettier --check . '!dist/**'",
     "format": "npx prettier --write . '!dist/**'",
     "postinstall": "node dist/setup.js",
-    "prepublishOnly": "npm run format && npm run build"
+    "prepublishOnly": "npm run build"
   },
   "bin": {
     "cdb": "./dist/index.js"

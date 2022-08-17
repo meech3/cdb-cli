@@ -27,7 +27,10 @@ const logger = new Logger(process.env.MODE);
 logger.add("invalid_command", (issue: string) => `Command "${issue}" is not a valid command`);
 logger.add("invalid_option", (issue: string) => `Option "${issue}" is not a valid option.`);
 logger.add("invalid_database", (issue: string) => `Database "${issue}" was not found.`);
-logger.add("invalid_path", (issue: string) => `Path "${issue}" is not a valid path.`);
+logger.add(
+  "invalid_path",
+  (issue: string) => `Path "${issue}" does not point to a valid document.`
+);
 logger.add("missing_file", (issue: string) => `File "${issue}" is either missing or corrupted.`);
 logger.add("missing_flag", (issue: string) => `The "${issue}" flag is required.`);
 logger.add("missing_argument", (issue: string) => `Missing argument(s) for "${issue}".`);

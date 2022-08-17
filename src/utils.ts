@@ -74,12 +74,7 @@ async function normalizeDocument(document: string): Promise<any> {
   }
 }
 
-async function request(
-  url: string,
-  method: string,
-  headers: any = {},
-  body: string | null = null
-): Promise<void> {
+async function request(url: string, method: string, headers: any = {}, body: string | null = null): Promise<void> {
   const defaults = await getDefaults();
   const encoded = Buffer.from(defaults.auth, "utf-8").toString("base64");
   headers["Authorization"] = `Basic ${encoded}`;

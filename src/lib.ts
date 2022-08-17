@@ -66,12 +66,7 @@ async function replicate(args: string[]): Promise<void> {
   source = String(baseSource);
   target = String(baseTarget);
 
-  await utils.request(
-    url,
-    "POST",
-    { "Content-Type": "application/json" },
-    JSON.stringify({ source, target })
-  );
+  await utils.request(url, "POST", { "Content-Type": "application/json" }, JSON.stringify({ source, target }));
 }
 
 async function insert(args: string[]): Promise<void> {
@@ -85,12 +80,7 @@ async function insert(args: string[]): Promise<void> {
     delete document._rev;
   }
 
-  await utils.request(
-    database,
-    "PUT",
-    { "Content-Type": "application/json" },
-    JSON.stringify(document)
-  );
+  await utils.request(database, "PUT", { "Content-Type": "application/json" }, JSON.stringify(document));
 }
 
 async function remove(args: string[]): Promise<void> {

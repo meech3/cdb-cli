@@ -128,8 +128,10 @@ cdb read database document
 
 `document` - the updated document
 
+`[rev]` - the rev of the document to be updated
+
 ```
-cdb update database document
+cdb update database document [rev]
 ```
 
 ## Miscellaneous functions

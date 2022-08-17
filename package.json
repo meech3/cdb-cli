@@ -1,6 +1,6 @@
 {
   "name": "cdb-cli",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Command line tool for interacting with CouchDB",
   "main": "dist/index.js",
   "type": "module",

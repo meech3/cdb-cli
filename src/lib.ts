@@ -214,6 +214,7 @@ async function help(): Promise<void> {
   Delete database: cdb destroy <database> --commit
   Database info: cdb info <database>
   Get all databases: cdb all
+  Replicate database: cdb <source> <target>
   Insert document: cdb insert <database> <document>
   Delete document: cdb delete <id> <rev>
   Read document: cdb read <database> <id>

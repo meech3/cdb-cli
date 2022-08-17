@@ -84,24 +84,14 @@ async function insert(args: string[]): Promise<void> {
 }
 
 async function remove(args: string[]): Promise<void> {
-  let rev;
-  const expected = ["database", "id"];
-
-  if (args.length >= 3) {
-    expected.push("rev");
-    rev = args[2];
-  }
-
-  utils.validateInput(args, expected);
+  utils.validateInput(args, ["database", "id"]);
 
   const database = await utils.normalizeDatabase(args[0]);
   const id = args[1];
 
   let url = `${database}/${id}`;
-  if (rev === undefined) {
-    rev = await utils.fetchRev(url);
-  }
-  url = `${url}?rev=${rev}`;
+  const rev = await utils.fetchRev(url);
+  url += `?rev=${rev}`;
 
   await utils.request(url, "DELETE");
 }
